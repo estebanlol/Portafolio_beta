@@ -1,0 +1,17 @@
+<script>
+  import { applyContentOverrides, initEditableImageDefaults, initEditableLinkDefaults } from "@/lib/contentStore";
+
+  function applyNow() {
+    initEditableImageDefaults();
+    initEditableLinkDefaults();
+    applyContentOverrides();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", applyNow, { once: true });
+  } else {
+    applyNow();
+  }
+
+  window.addEventListener("content-overrides-applied", applyNow);
+</script>

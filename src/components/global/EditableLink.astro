@@ -1,0 +1,24 @@
+---
+interface Props {
+  linkKey: string;
+  textKey?: string;
+  href: string;
+  class?: string;
+}
+
+const { linkKey, textKey = linkKey, href, class: className = "", ...rest } = Astro.props;
+---
+
+<span class="editable-link inline-flex items-center gap-2">
+  <a href={href} data-editable-link={linkKey} class={className} {...rest}>
+    <span data-editable={textKey}><slot /></span>
+  </a>
+  <button
+    type="button"
+    data-edit-link-trigger={linkKey}
+    class="editable-link-trigger hidden shrink-0 rounded-full border border-base-300 px-2 py-0.5 text-[10px] tracking-tight text-base-600 dark:border-base-700 dark:text-base-300"
+    aria-label="Editar URL do link"
+  >
+    URL
+  </button>
+</span>
